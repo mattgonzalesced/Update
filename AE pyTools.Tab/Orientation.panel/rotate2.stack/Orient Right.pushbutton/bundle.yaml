@@ -1,0 +1,29 @@
+title: 
+  en_us: Orient Right
+tooltip: 
+  en_us: >-
+    Version = 1.2
+    
+    Date    = 04.03.2025
+    ________________________________________________________________
+    Description:
+    
+    Orients selected model elements to face 'plan east' while 
+    maintaining their position. Useful if many elements need to
+    face the same direction. 
+    
+    
+    SHIFT+Click: 
+    
+    Force tags to remain in place on execution, ignoring the current tag configurations.
+    
+    Note: 
+    This ignores Annotations, Pinned Elements, System Families, 
+    and Face-Based Elements hosted to vertical walls. 
+    
+    ________________________________________________________________
+
+author: Anthony Evelina - CoolSys (2025)
+engine:
+  persistent: false
+  full_frame: false
