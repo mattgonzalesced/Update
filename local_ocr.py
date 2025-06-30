@@ -1,17 +1,7 @@
 #!/usr/bin/env python3
 """Run OCR locally using PaddleOCR.
 Requires: pip install paddleocr
-Usage: python local_ocr.py image_path
-Outputs bounding boxes with text.
-"""
-import sys
-from paddleocr import PaddleOCR
 
-if len(sys.argv) < 2:
-    print('Usage: python local_ocr.py image_path')
-    sys.exit(1)
-
-image_path = sys.argv[1]
 ocr = PaddleOCR(use_angle_cls=True, lang='en')
 
 result = ocr.ocr(image_path, cls=True)
