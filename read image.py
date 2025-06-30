@@ -1,27 +1,17 @@
+from transformers import pipeline
 from PIL import Image
-from transformers import pipeline, TrOCRProcessor, VisionEncoderDecoderModel
-from craft_hw_ocr import OCR
+import cv2
 
-def ocr_with_coordinates(image_path):
-    # Load and preprocess image
-    image = Image.open(image_path).convert("RGB")
-    
-    # Load detectors and models
-    detector  = pipeline("object-detection", model="hezarai/CRAFT")
-    tac_proc  = TrOCRProcessor.from_pretrained("microsoft/trocr-large-printed")
-    tac_model = VisionEncoderDecoderModel.from_pretrained("microsoft/trocr-large-printed")
-    
-    # Detect text regions
-    detections = detector(image)
-    boxes      = [det["box"] for det in detections]
-    
-    # Recognize text
-    results = []
-    for xmin, ymin, w, h in boxes:
-        crop   = image.crop((xmin, ymin, xmin + w, ymin + h))
-        inputs = tac_proc(crop, return_tensors="pt").to(tac_model.device)
-        out    = tac_model.generate(**inputs)
-        text   = tac_proc.batch_decode(out, skip_special_tokens=True)[0]
-        results.append({"box": (xmin, ymin, w, h), "text": text})
-    
-    return results
+# 1.1 Initialize the CRAFT-based detector
+detector = pipeline(
+    "object-detection",
+    model="hezarai/CRAFT",        # CRAFT text detector on Hugging Face
+    device=-1                      # CPU (use 0 for GPU if available)
+)
+
+# 1.2 Quick smoke test
+image = Image.open(r"C:\Users\m.gonzales\OneDrive - CoolSys Inc\Desktop\CHL-A.pdf").convert("RGB")
+outputs = detector(image)
+
+print(f"Detected {len(outputs)} text regions")
+print("Sample output:", outputs[0])
