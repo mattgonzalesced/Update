@@ -14,10 +14,7 @@ This repository includes a helper script to run OCR locally using [PaddleOCR](ht
 ## Usage
 
 ```bash
-python local_ocr.py [path/to/image.jpg]
-```
 
-If no path is provided, the script opens a Tkinter file dialog so you can choose an image. The recognized text is printed with confidence scores and the bounding boxes as `(xmin, ymin)` and `(xmax, ymax)` coordinates.
 
 ## Example output
 

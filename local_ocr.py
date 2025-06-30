@@ -1,30 +1,7 @@
 #!/usr/bin/env python3
 """Run OCR locally using PaddleOCR.
 Requires: pip install paddleocr
-Usage: python local_ocr.py [image_path]
-Outputs bounding boxes with text. If no path is given, a file dialog will open
-to choose an image.
-"""
-import sys
-import tkinter as tk
-from tkinter import filedialog
-from paddleocr import PaddleOCR
 
-if len(sys.argv) >= 2:
-    image_path = sys.argv[1]
-else:
-    root = tk.Tk()
-    root.withdraw()
-    image_path = filedialog.askopenfilename(
-        title="Select image file",
-        filetypes=[
-            ("Image Files", "*.jpg *.jpeg *.png *.bmp *.tiff"),
-            ("All Files", "*.*"),
-        ],
-    )
-    if not image_path:
-        print("No file selected. Exiting.")
-        sys.exit(0)
 ocr = PaddleOCR(use_angle_cls=True, lang='en')
 
 result = ocr.ocr(image_path, cls=True)
